@@ -15,8 +15,7 @@ import (
 )
 
 const (
-	_oddList = "--odd-list--"
-	_badKey  = "--bad-key--"
+	_badKey = "--bad-key--"
 )
 
 func cleanKey(r rune) rune {
@@ -27,8 +26,8 @@ func cleanKey(r rune) rune {
 	return r
 }
 
-// Encode AFAIRE.
-func Encode(buf *buffer.Buffer, kv map[string]interface{}) {
+// EncodeMap AFAIRE.
+func EncodeMap(buf *buffer.Buffer, kv map[string]interface{}) {
 	addSpace := false
 
 	for key, value := range kv {
@@ -50,7 +49,9 @@ func Encode(buf *buffer.Buffer, kv map[string]interface{}) {
 // EncodeList AFAIRE.
 func EncodeList(buf *buffer.Buffer, kv ...interface{}) {
 	if len(kv)%2 == 1 {
-		buf.AppendString(_oddList)
+		buf.AppendString("--logfmt--")
+		buf.AppendByte('=')
+		buf.AppendString("--odd-list--")
 		return
 	}
 
